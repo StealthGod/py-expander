@@ -28,7 +28,6 @@ def get_path_video(filename):
     else:
         return None
 
-
 def get_path_non_video(filename):
     base_filename = os.path.basename(filename)
     base_filename.lower()
@@ -41,6 +40,22 @@ def get_path_non_video(filename):
     else:
         return None
 
+def get_title(filename):
+    guess = guessit.guess_file_info(filename)
+	
+    if guess[u'type'] == u'episode':
+        series = guess.get(u'series', u'').title()
+        season = guess.get(u'season', u'')
+        episode = guess.get(u'episodeNumber', u'')
+
+        return config.TV_TITLE.format(series=series, season=season, episode=episode)
+    elif guess[u'type'] == u'movie':
+        title = guess.get(u'title', u'').title()
+        year = guess.get(u'year', u'')
+
+        return config.MOVIE_TITLE.format(title=title, year=year)
+    else:
+        return filename
 
 def get_categorized_path(filename):
     """

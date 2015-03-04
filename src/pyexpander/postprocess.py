@@ -35,7 +35,8 @@ def process_file(handler, torrent_name, file_path):
     filename = os.path.basename(file_path)
     category_path = get_categorized_path(os.path.join(torrent_name, filename))
     if category_path is not None:
-        destination_dir = os.path.join(category_path, torrent_name)
+        #destination_dir = os.path.join(category_path, torrent_name)
+        destination_dir = category_path
 
         # Creates target directory (of category path)
         _create_extraction_path(destination_dir)
